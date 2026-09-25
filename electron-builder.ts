@@ -1,9 +1,11 @@
 // @see - https://www.electron.build/configuration/configuration
-{
-  $schema: "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
-  appId: "com.yourname.my-sveltron-app",
+import type { Configuration } from "electron-builder";
+import { APP_NAME, APP_PACKAGE } from "./config.ts";
+
+export const electronBuilderConfig: Configuration = {
+  appId: APP_PACKAGE,
   asar: true,
-  productName: "My Sveltron App",
+  productName: APP_NAME,
   directories: {
     output: "release/${version}",
   },
@@ -92,4 +94,4 @@
     ],
     artifactName: "${productName}-Linux-${version}-${arch}.${ext}",
   },
-}
+};
