@@ -19,10 +19,10 @@ export default defineConfig({
       csp: {
         mode: "hash",
         directives: {
-          "script-src": ["self"],
+          "script-src": ["localhost"],
         },
         reportOnly: {
-          "script-src": ["self"],
+          "script-src": ["localhost"],
           "report-uri": ["/"],
         },
       },
