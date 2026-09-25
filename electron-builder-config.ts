@@ -2,7 +2,7 @@
 import type { Configuration } from "electron-builder";
 import { APP_NAME, APP_PACKAGE } from "./config.ts";
 
-export const electronBuilderConfig: Configuration = {
+const electronBuilderConfig: Configuration = {
   appId: APP_PACKAGE,
   asar: true,
   productName: APP_NAME,
@@ -95,3 +95,4 @@ export const electronBuilderConfig: Configuration = {
     artifactName: "${productName}-Linux-${version}-${arch}.${ext}",
   },
 };
+export default electronBuilderConfig;
