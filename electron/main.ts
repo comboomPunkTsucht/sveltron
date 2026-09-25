@@ -3,6 +3,8 @@ import { app, BrowserWindow, protocol, net } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
+import { APP_NAME, APP_PACKAGE, APP_PROTOCOL } from "../config.ts";
+
 import { type LogMessage } from "../src/lib/utils/log";
 
 //const require = createRequire(import.meta.url);
@@ -18,10 +20,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │ │ └── preload.mjs
 // │
 process.env.APP_ROOT = path.join(__dirname, "..");
-
-export const APP_NAME = "My Sveltron App";
-export const APP_PACKAGE = "dev.yourname.my-sveltron-app";
-export const APP_PROTOCOL = APP_PACKAGE.split(".")[2];
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];

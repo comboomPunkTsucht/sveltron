@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
 import electron from "vite-plugin-electron/simple";
-import { APP_PROTOCOL } from "./electron/main.ts";
+import { APP_PROTOCOL } from "./config.ts";
 
 export default defineConfig({
   fmt: {},
@@ -34,9 +34,9 @@ export default defineConfig({
           "img-src": ["self", `${APP_PROTOCOL}:`, "data:"],
 
           // Erlaubt Vite's WebSocket-Verbindung im Dev-Modus und IPC
-          "connect-src": ["self", `${APP_PROTOCOL}:`, "localhost", "ws://localhost:*"]
-        }
-      }
+          "connect-src": ["self", `${APP_PROTOCOL}:`, "localhost", "ws://localhost:*"],
+        },
+      },
       compilerOptions: {
         // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
         runes: ({ filename }) =>
