@@ -3,7 +3,7 @@ import { app, BrowserWindow, protocol, net } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { APP_NAME, APP_PACKAGE, APP_PROTOCOL } from "../config.ts";
+import { APP_NAME, APP_PACKAGE, APP_PROTOCOL, APP_VERSION } from "../config.ts";
 
 import { type LogMessage } from "../src/lib/utils/log";
 
@@ -131,6 +131,7 @@ app.on("window-all-closed", () => {
 
 app.setAboutPanelOptions({
   applicationName: APP_NAME,
+  applicationVersion: APP_VERSION,
   iconPath: path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"),
 });
 
@@ -144,6 +145,9 @@ app.on("activate", () => {
 
 app.on("ready", () => {
   if (win) {
+    win.setIcon(
+      path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"),
+    );
     win.setAppDetails({
       relaunchDisplayName: APP_NAME,
       relaunchCommand: process.execPath,
@@ -155,8 +159,6 @@ app.on("ready", () => {
     });
   }
 });
-
-win.setIcon(path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"));
 app.setSecureKeyboardEntryEnabled(true);
 app.setDesktopName(APP_NAME);
 app.setName(APP_NAME);
