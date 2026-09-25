@@ -1,5 +1,7 @@
 {
   "name": "app.comboompunktsucht.sveltron",
+  "author": "mcpeaps_HD<mcpeaps_HD@outlook.com>",
+  "description": "A SvelteKit app built with Electron",
   "version": "0.0.1",
   "private": true,
   "type": "module",
