@@ -42,7 +42,7 @@ function createWindow() {
 
     // SPA-Fallback: Wenn die URL keine Dateiendung hat (z.B. /about), lade die index.html
     if (!path.extname(filePath)) {
-      filePath = path.join(__dirname, "../build/index.html");
+      filePath = path.join(RENDERER_DIST, "index.html");
     }
 
     return net.fetch("file://" + filePath);
@@ -69,7 +69,7 @@ function createWindow() {
   } else {
     // win.loadFile('dist/index.html')
     if (win) {
-      win.loadURL(`${applicationprotocol}://localhost`););
+      win.loadURL(`${applicationprotocol}://localhost`);
     }
   }
 
