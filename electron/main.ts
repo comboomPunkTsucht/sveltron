@@ -57,7 +57,7 @@ function createWindow() {
   }
 
   win.webContents.on("devtools-opened", () => {
-    if (!VITE_DEV_SERVER_URL) {
+    if (!VITE_DEV_SERVER_URL && false) {
       // Schließt die DevTools sofort wieder, falls jemand sie im Production-Build öffnet
       if (win) {
         win.webContents.closeDevTools();
@@ -108,7 +108,7 @@ app.on("window-all-closed", () => {
 });
 
 app.setAboutPanelOptions({
-  applicationName: "Chess Engine Battle",
+  applicationName: "My Sveltron App",
   iconPath: path.join(
     process.env.VITE_PUBLIC,
     process.platform === "darwin" ? "AppIcon.icon" : "icon.png",

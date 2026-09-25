@@ -13,7 +13,7 @@ export default defineConfig({
     rules: { "vite-plus/prefer-vite-plus-imports": "error" },
     options: { typeAware: true, typeCheck: true },
   },
-  plugins: lazyPlugins(() => [
+  plugins: [
     tailwindcss(),
     sveltekit({
       compilerOptions: {
@@ -24,8 +24,18 @@ export default defineConfig({
       alias: { $lib: "src/lib" },
       adapter: adapter({
         // Zwingend erforderlich für Electron SPA-Routing
-        fallback: "index.html",
+        //fallback: "index.html",
+
+        strict: false,
+        precompress: true,
       }),
+      paths: {
+        // Zwingt SvelteKit dazu, IMMER relative Pfade zu generieren (z.B. ./_app/...)
+        relative: true,
+      },
+      // Optional, aber sehr empfehlenswert:
+      // Manche OS-Ordnerstrukturen haben Probleme mit Ordnern, die mit einem Unterstrich beginnen.
+      appDir: "app",
       preprocess: [mdsvex({ extensions: [".svx", ".md"] })],
       extensions: [".svelte", ".svx", ".md"],
     }),
@@ -37,7 +47,7 @@ export default defineConfig({
         input: "electron/preload.ts",
       },
     }),
-  ]),
+  ],
   test: {
     expect: { requireAssertions: true },
     projects: [
