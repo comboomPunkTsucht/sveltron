@@ -16,11 +16,22 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     sveltekit({
+      csp: {
+        mode: "hash",
+        directives: {
+          "script-src": ["self"],
+        },
+        reportOnly: {
+          "script-src": ["self"],
+          "report-uri": ["/"],
+        },
+      },
       compilerOptions: {
         // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
         runes: ({ filename }) =>
           filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
       },
+
       alias: { $lib: "src/lib" },
       adapter: adapter({
         // Zwingend erforderlich für Electron SPA-Routing
