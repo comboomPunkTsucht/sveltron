@@ -3,7 +3,7 @@ import { app, BrowserWindow } from "electron";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-import { type LogMessage } from "../src/log";
+import { type LogMessage } from "../src/lib/utils/log";
 
 //const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
