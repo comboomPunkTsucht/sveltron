@@ -8,7 +8,7 @@ node_modules
 /.svelte-kit
 /build
 .dist
-.dist-electron
+dist-electron
 release
 
 # OS
