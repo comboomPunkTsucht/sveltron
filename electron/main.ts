@@ -145,6 +145,8 @@ app.on("activate", () => {
 app.on("ready", () => {
   if (win) {
     win.setAppDetails({
+      relaunchDisplayName: APP_NAME,
+      relaunchCommand: process.execPath,
       appId: APP_PACKAGE,
       appIconPath: path.join(
         RENDERER_DIST,
@@ -154,6 +156,10 @@ app.on("ready", () => {
   }
 });
 
+win.setIcon(path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"));
+app.setSecureKeyboardEntryEnabled(true);
+app.setDesktopName(APP_NAME);
+app.setName(APP_NAME);
 app.enableSandbox();
 
 app.whenReady().then(createWindow);

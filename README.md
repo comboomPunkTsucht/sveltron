@@ -85,15 +85,17 @@ export const APP_PACKAGE = package_json.name;
 export const APP_PROTOCOL = APP_PACKAGE.split(".")[2];
 ```
 
-| Value            | Used for                                                     |
-| ---------------- | ------------------------------------------------------------ |
-| `APP_NAME`     | Window/about-panel title,`productName` in electron-builder |
-| `APP_PACKAGE`  | Bundle ID /`appId` (`com.yourname.my-sveltron-app`)      |
-| `APP_PROTOCOL` | Custom URL scheme (`my-sveltron-app://`) + CSP directives  |
+| Value            | Used for                                                                                    |
+| ---------------- | ------------------------------------------------------------------------------------------- |
+| `APP_NAME`       | Menu bar, “About/Hide …” menu items (`app.setName`), about panel, `productName` in electron-builder |
+| `APP_PACKAGE`    | Bundle ID / `appId` — comes from the `name` field in `package.json`                          |
+| `APP_PROTOCOL`   | 3rd segment of that id (`sveltron`) → custom URL scheme + CSP directives                     |
+
+Because `package.json` `name` doubles as the bundle ID, keep it in reverse-DNS form with at least three segments, e.g. `app.yourname.your-app` (the protocol is taken from the **third** segment).
 
 Also adjust:
 
-- `package.json` → `name` (and `version`, which drives the `release/<version>/` output folder)
+- `package.json` → `version` (drives the `release/<version>/` output folder)
 - Icons → `static/icon.png` (Windows/Linux) and `static/AppIcon.icon` (macOS); editable sources live in [`Logo-sveltron/`](Logo-sveltron/)
 
 ## Scripts
