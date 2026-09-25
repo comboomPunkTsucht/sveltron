@@ -30,8 +30,7 @@ export default defineConfig({
         precompress: true,
       }),
       paths: {
-        // Zwingt SvelteKit dazu, IMMER relative Pfade zu generieren (z.B. ./_app/...)
-        relative: true,
+        relative: false,
       },
       // Optional, aber sehr empfehlenswert:
       // Manche OS-Ordnerstrukturen haben Probleme mit Ordnern, die mit einem Unterstrich beginnen.
