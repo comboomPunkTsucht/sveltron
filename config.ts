@@ -1,3 +1,5 @@
+import package_json from "./package.json" with { type: "json" };
+
 export const APP_NAME = "My Sveltron App";
-export const APP_PACKAGE = "com.yourname.my-sveltron-app";
+export const APP_PACKAGE = package_json.name;
 export const APP_PROTOCOL = APP_PACKAGE.split(".")[2];
