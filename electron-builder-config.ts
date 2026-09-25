@@ -12,8 +12,10 @@ const electronBuilderConfig: Configuration = {
   files: ["build/**/*", "dist-electron/**/*", "package.json"],
 
   mac: {
+    name: APP_NAME,
+    repository: "https://github.com/comboompunktsucht/sveltron",
     icon: "static/AppIcon.icon",
-    category: "public.app-category.games",
+    category: "public.app-category.utilities",
     target: [
       {
         target: "dmg",
@@ -28,6 +30,8 @@ const electronBuilderConfig: Configuration = {
         arch: ["x64", "arm64", "universal"],
       },
     ],
+    executableName: APP_NAME,
+    darkModeSupport: true,
     artifactName: "${productName}-Mac-${version}-${arch}.${ext}",
   },
   pkg: {
@@ -56,6 +60,7 @@ const electronBuilderConfig: Configuration = {
         arch: ["x64", "arm64"],
       },
     ],
+    executableName: APP_NAME,
     artifactName: "${productName}-Windows-${version}-${arch}.${ext}",
   },
   nsis: {
@@ -70,6 +75,7 @@ const electronBuilderConfig: Configuration = {
   },
   linux: {
     icon: "static/icon.png",
+    category: "Utility",
     target: [
       {
         target: "AppImage",
@@ -92,6 +98,7 @@ const electronBuilderConfig: Configuration = {
         arch: ["x64", "arm64"],
       },
     ],
+    executableName: APP_NAME,
     artifactName: "${productName}-Linux-${version}-${arch}.${ext}",
   },
 };
