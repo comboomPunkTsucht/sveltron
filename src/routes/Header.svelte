@@ -1,8 +1,13 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
   import { page } from "$app/state";
-  import github from "#lib/images/github.svg";
-  import logo from "#lib/images/svelte-logo.svg";
+  import github from "$lib/images/github.svg";
+  import logo from "$lib/images/svelte-logo.svg";
+  import { log } from "$lib/utils/log";
+
+  function sendMessage() {
+    log("INFO", "Sende Nachricht an den Main-Prozess");
+  }
 </script>
 
 <header>
@@ -23,12 +28,8 @@
       <li aria-current={page.url.pathname === "/about" ? "page" : undefined}>
         <a href={resolve("/about")}>About</a>
       </li>
-      <li
-        aria-current={page.url.pathname.startsWith("/sverdle")
-          ? "page"
-          : undefined}
-      >
-        <a href={resolve("/sverdle")}>Sverdle</a>
+      <li>
+        <button onclick={sendMessage}>Send Message</button>
       </li>
     </ul>
     <svg viewBox="0 0 2 3" aria-hidden="true">

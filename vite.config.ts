@@ -21,6 +21,7 @@ export default defineConfig({
         runes: ({ filename }) =>
           filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
       },
+      alias: { $lib: "src/lib" },
       adapter: adapter({
         // Zwingend erforderlich für Electron SPA-Routing
         fallback: "index.html",

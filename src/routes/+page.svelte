@@ -1,12 +1,12 @@
 <script lang="ts">
-  import welcomeFallback from "#lib/images/svelte-welcome.png";
-  import welcome from "#lib/images/svelte-welcome.webp";
+  import welcomeFallback from "$lib/images/svelte-welcome.png";
+  import welcome from "$lib/images/svelte-welcome.webp";
 
   import Counter from "./Counter.svelte";
 </script>
 
 <svelte:head>
-  <title>Home</title>
+  <title>My Sveltron App - Home</title>
   <meta name="description" content="Svelte demo app" />
 </svelte:head>
 
