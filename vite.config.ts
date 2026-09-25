@@ -79,8 +79,8 @@ export default defineConfig({
     sourcemap: true,
     modulePreload: true,
     cssCodeSplit: true,
-    cssMinify: "esbuild",
-    minify: "esbuild",
+    cssMinify: true,
+    minify: true,
     target: "es2020",
   },
 });
