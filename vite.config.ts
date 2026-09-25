@@ -21,11 +21,11 @@ export default defineConfig({
         mode: "hash",
         directives: {
           // Grundsätzlich alles nur lokal über file:// (self) oder unser app:// Protokoll erlauben
-          "default-src": ["self", "app:"],
+          "default-src": ["self", `${APP_PROTOCOL}:`, "localhost", "unsafe-eval"],
 
           // Skripte aus der App und vom Vite-Dev-Server (localhost) erlauben.
           // Die Hashes für Svelte's Inline-Skripte fügt der "hash"-Mode automatisch hinzu!
-          "script-src": ["self", `${APP_PROTOCOL}:`, "localhost"],
+          "script-src": ["self", `${APP_PROTOCOL}:`, "localhost", "unsafe-eval"],
 
           // SvelteKit generiert manchmal Inline-Styles, daher ist das hier oft nötig
           "style-src": ["self", `${APP_PROTOCOL}:`, "unsafe-inline"],
