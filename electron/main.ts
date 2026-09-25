@@ -49,7 +49,7 @@ function createWindow() {
   });
 
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, "icon.png"),
+    icon: path.join(RENDERER_DIST, "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
     },
@@ -133,10 +133,7 @@ app.on("window-all-closed", () => {
 
 app.setAboutPanelOptions({
   applicationName: applicationName,
-  iconPath: path.join(
-    process.env.VITE_PUBLIC,
-    process.platform === "darwin" ? "AppIcon.icon" : "icon.png",
-  ),
+  iconPath: path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"),
 });
 
 app.on("activate", () => {
@@ -152,7 +149,7 @@ app.on("ready", () => {
     win.setAppDetails({
       appId: applicationpackage,
       appIconPath: path.join(
-        process.env.VITE_PUBLIC,
+        RENDERER_DIST,
         process.platform === "darwin" ? "AppIcon.icon" : "icon.png",
       ),
     });
