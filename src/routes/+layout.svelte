@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Header from "./Header.svelte";
+  import NavBar from "$lib/components/NavBar.svelte";
   import "./layout.css";
 
   import { onMount } from "svelte";
@@ -16,7 +16,7 @@
 </script>
 
 <div class="app">
-  <Header />
+  <NavBar />
   <main>{@render children()}</main>
 
   <footer>

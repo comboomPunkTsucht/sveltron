@@ -1,14 +1,11 @@
 <script lang="ts">
   import welcomeFallback from "$lib/images/svelte-welcome.png";
   import welcome from "$lib/images/svelte-welcome.webp";
-
-  import Counter from "./Counter.svelte";
+  import Header from "$lib/components/Headder.svelte";
+  import Counter from "$lib/components/Counter.svelte";
 </script>
 
-<svelte:head>
-  <title>My Sveltron App - Home</title>
-  <meta name="description" content="Svelte demo app" />
-</svelte:head>
+<Header title="Home" description="Svelte demo app" />
 
 <section>
   <h1>

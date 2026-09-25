@@ -1,13 +1,10 @@
 <script lang="ts">
   import { resolve } from "$app/paths";
+  import Header from "$lib/components/Headder.svelte";
 </script>
 
-<svelte:head>
-  <title>My Sveltron App - About</title>
-  <meta name="description" content="About this app" />
-</svelte:head>
-
 <div class="text-column">
+  <Header title="About" description="About this app" />
   <h1>About this app</h1>
 
   <p>
