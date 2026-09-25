@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, protocol, net } from "electron";
 //import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -19,6 +19,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │
 process.env.APP_ROOT = path.join(__dirname, "..");
 
+const applicationName = "My Sveltron App";
+const applicationpackage = "dev.yourname.my-sveltron-app";
+const applicationprotocol = applicationpackage.split(".")[2];
+
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
 export const MAIN_DIST = path.join(process.env.APP_ROOT, "dist-electron");
@@ -31,6 +35,19 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 let win: BrowserWindow | null;
 
 function createWindow() {
+  // 1. Den lokalen "Server" simulieren und SPA-Routing aktivieren
+  protocol.handle(applicationprotocol, (request) => {
+    const urlPath = new URL(request.url).pathname;
+    let filePath = path.join(__dirname, "../build", urlPath);
+
+    // SPA-Fallback: Wenn die URL keine Dateiendung hat (z.B. /about), lade die index.html
+    if (!path.extname(filePath)) {
+      filePath = path.join(__dirname, "../build/index.html");
+    }
+
+    return net.fetch("file://" + filePath);
+  });
+
   win = new BrowserWindow({
     icon: path.join(process.env.VITE_PUBLIC, "icon.png"),
     webPreferences: {
@@ -52,7 +69,7 @@ function createWindow() {
   } else {
     // win.loadFile('dist/index.html')
     if (win) {
-      win.loadFile(path.join(RENDERER_DIST, "index.html"));
+      win.loadURL(`${applicationprotocol}://localhost`););
     }
   }
 
@@ -97,6 +114,13 @@ function createWindow() {
   });
 }
 
+protocol.registerSchemesAsPrivileged([
+  {
+    scheme: applicationprotocol,
+    privileges: { standard: true, secure: true, supportFetchAPI: true },
+  },
+]);
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
@@ -108,7 +132,7 @@ app.on("window-all-closed", () => {
 });
 
 app.setAboutPanelOptions({
-  applicationName: "My Sveltron App",
+  applicationName: applicationName,
   iconPath: path.join(
     process.env.VITE_PUBLIC,
     process.platform === "darwin" ? "AppIcon.icon" : "icon.png",
@@ -126,7 +150,7 @@ app.on("activate", () => {
 app.on("ready", () => {
   if (win) {
     win.setAppDetails({
-      appId: "dev.yourname.my-sveltron-app",
+      appId: applicationpackage,
       appIconPath: path.join(
         process.env.VITE_PUBLIC,
         process.platform === "darwin" ? "AppIcon.icon" : "icon.png",
