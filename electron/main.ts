@@ -19,9 +19,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // │
 process.env.APP_ROOT = path.join(__dirname, "..");
 
-const applicationName = "My Sveltron App";
-const applicationpackage = "dev.yourname.my-sveltron-app";
-const applicationprotocol = applicationpackage.split(".")[2];
+export const APP_NAME = "My Sveltron App";
+export const APP_PACKAGE = "dev.yourname.my-sveltron-app";
+export const APP_PROTOCOL = APP_PACKAGE.split(".")[2];
 
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 export const VITE_DEV_SERVER_URL = process.env["VITE_DEV_SERVER_URL"];
@@ -36,7 +36,7 @@ let win: BrowserWindow | null;
 
 function createWindow() {
   // 1. Den lokalen "Server" simulieren und SPA-Routing aktivieren
-  protocol.handle(applicationprotocol, (request) => {
+  protocol.handle(APP_PROTOCOL, (request) => {
     const urlPath = new URL(request.url).pathname;
     let filePath = path.join(__dirname, "../build", urlPath);
 
@@ -69,7 +69,7 @@ function createWindow() {
   } else {
     // win.loadFile('dist/index.html')
     if (win) {
-      win.loadURL(`${applicationprotocol}://localhost`);
+      win.loadURL(`${APP_PROTOCOL}://localhost`);
     }
   }
 
@@ -116,7 +116,7 @@ function createWindow() {
 
 protocol.registerSchemesAsPrivileged([
   {
-    scheme: applicationprotocol,
+    scheme: APP_PROTOCOL,
     privileges: { standard: true, secure: true, supportFetchAPI: true },
   },
 ]);
@@ -132,7 +132,7 @@ app.on("window-all-closed", () => {
 });
 
 app.setAboutPanelOptions({
-  applicationName: applicationName,
+  applicationName: APP_NAME,
   iconPath: path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"),
 });
 
@@ -147,7 +147,7 @@ app.on("activate", () => {
 app.on("ready", () => {
   if (win) {
     win.setAppDetails({
-      appId: applicationpackage,
+      appId: APP_PACKAGE,
       appIconPath: path.join(
         RENDERER_DIST,
         process.platform === "darwin" ? "AppIcon.icon" : "icon.png",

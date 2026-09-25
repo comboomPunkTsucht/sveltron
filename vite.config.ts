@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import adapter from "@sveltejs/adapter-static";
 import { sveltekit } from "@sveltejs/kit/vite";
 import electron from "vite-plugin-electron/simple";
+import { APP_PROTOCOL } from "./electron/main.ts";
 
 export default defineConfig({
   fmt: {},
@@ -19,13 +20,23 @@ export default defineConfig({
       csp: {
         mode: "hash",
         directives: {
-          "script-src": ["localhost", "self", "unsafe-eval"],
-        },
-        reportOnly: {
-          "script-src": ["localhost", "self", "unsafe-eval"],
-          "report-uri": ["/"],
-        },
-      },
+          // Grundsätzlich alles nur lokal über file:// (self) oder unser app:// Protokoll erlauben
+          "default-src": ["self", "app:"],
+
+          // Skripte aus der App und vom Vite-Dev-Server (localhost) erlauben.
+          // Die Hashes für Svelte's Inline-Skripte fügt der "hash"-Mode automatisch hinzu!
+          "script-src": ["self", `${APP_PROTOCOL}:`, "localhost"],
+
+          // SvelteKit generiert manchmal Inline-Styles, daher ist das hier oft nötig
+          "style-src": ["self", `${APP_PROTOCOL}:`, "unsafe-inline"],
+
+          // Wichtig für lokale Bilder und Base64-SVGs
+          "img-src": ["self", `${APP_PROTOCOL}:`, "data:"],
+
+          // Erlaubt Vite's WebSocket-Verbindung im Dev-Modus und IPC
+          "connect-src": ["self", `${APP_PROTOCOL}:`, "localhost", "ws://localhost:*"]
+        }
+      }
       compilerOptions: {
         // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
         runes: ({ filename }) =>
