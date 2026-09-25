@@ -12,8 +12,6 @@ const electronBuilderConfig: Configuration = {
   files: ["build/**/*", "dist-electron/**/*", "package.json"],
 
   mac: {
-    name: APP_NAME,
-    repository: "https://github.com/comboompunktsucht/sveltron",
     icon: "static/AppIcon.icon",
     category: "public.app-category.utilities",
     target: [
