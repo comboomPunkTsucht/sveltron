@@ -166,5 +166,7 @@ app.on("ready", () => {
   }
 });
 app.setSecureKeyboardEntryEnabled(true);
+app.setDesktopName(APP_NAME);
+app.setName(APP_NAME);
 
 app.whenReady().then(createWindow);
