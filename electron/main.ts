@@ -53,6 +53,10 @@ function createWindow() {
       sandbox: true,
       zoomFactor: 0.8,
     },
+    title: APP_NAME,
+    darkTheme: true,
+    name: APP_NAME,
+    enableLargerThanScreen: true,
   });
 
   // Test active push message to Renderer-process.
@@ -162,7 +166,5 @@ app.on("ready", () => {
   }
 });
 app.setSecureKeyboardEntryEnabled(true);
-app.setDesktopName(APP_NAME);
-app.setName(APP_NAME);
 
 app.whenReady().then(createWindow);
