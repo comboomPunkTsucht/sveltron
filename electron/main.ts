@@ -50,6 +50,8 @@ function createWindow() {
     icon: path.join(RENDERER_DIST, "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
+      sandbox: true,
+      zoomFactor: 0.8,
     },
   });
 
@@ -162,6 +164,5 @@ app.on("ready", () => {
 app.setSecureKeyboardEntryEnabled(true);
 app.setDesktopName(APP_NAME);
 app.setName(APP_NAME);
-app.enableSandbox();
 
 app.whenReady().then(createWindow);
