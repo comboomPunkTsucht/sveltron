@@ -47,12 +47,14 @@ function createWindow() {
   });
 
   win = new BrowserWindow({
-    icon: path.join(RENDERER_DIST, "icon.png"),
+    icon: path.join(RENDERER_DIST, process.platform === "darwin" ? "AppIcon.icon" : "icon.png"),
     webPreferences: {
       preload: path.join(__dirname, "preload.mjs"),
       sandbox: true,
       zoomFactor: 0.8,
     },
+    backgroundColor: "#2e3440",
+    accentColor: "#a3be8c",
     title: APP_NAME,
     darkTheme: true,
     name: APP_NAME,
